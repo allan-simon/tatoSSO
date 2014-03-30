@@ -1,0 +1,1 @@
+/usr/local/share/cppcmsskel//tools/update_local_template.py
