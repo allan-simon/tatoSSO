@@ -1,0 +1,18 @@
+<% c++ #include "contents/Pages.h" %>
+<% skin %>
+<% view homepage uses contents::pages::Homepage extends master %>
+<% template title() %><% gt "New Website"  %><% end template %>
+
+
+<% template main_content() %> 
+    <div class="module">
+        <% gt "Congratulation you've created a new website using cppcms-skeleton!" %>
+        <br/>
+        <% gt "you can replace this text by something else by editing the homepage.tmpl file." %>
+    </div>
+<% end template %>
+
+
+
+<% end view %>
+<% end skin %>
