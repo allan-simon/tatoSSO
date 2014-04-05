@@ -12,6 +12,7 @@
  */
 
 #include <cppcms/session_interface.h>
+#include <cppcms_skel/models/Users.h>
 #include "Users.h"
 
 
@@ -41,7 +42,7 @@ Users::Users(cppcms::service& serv) :
     //%%%NEXT_ACTION_DISPATCHER_MARKER%%%, do not delete
 
 
-
+    usersModel = new cppcmsskel::models::Users();
     ticketsModel = new models::Tickets();
     //%%%NEXT_NEW_MODEL_CTRL_MARKER%%%
 }
@@ -50,6 +51,7 @@ Users::Users(cppcms::service& serv) :
  *
  */
 Users::~Users() {
+    delete usersModel;
     delete ticketsModel;
     //%%%NEXT_DEL_MODEL_CTRL_MARKER%%%
 }
@@ -132,8 +134,46 @@ void Users::register_new_treat() {
     form.load(context());
 
     if (!form.validate()) {
+        add_error(_("Form not valid"));
+        go_back_to_previous_page();
+        return;
+    }
+
+    const std::string username = form.username.value();
+    const std::string email = form.email.value();
+
+    if (usersModel->username_exists(username)) {
+        add_error(_("Username already taken"));
+        go_back_to_previous_page();
+        return;
+    }
+
+    if (usersModel->email_exists(email)) {
+        add_error(_("Email already taken"));
+        go_back_to_previous_page();
+        return;
+    }
+
+
+
+    int userId = usersModel->add(
+        username,
+        form.password.value(),
+        email
+    );
+    if (userId >= 0) {
+        //TODO add should return the id of the newly created user
+        //     or -1 if not created
+        set_current_username_and_id (
+            username,
+            userId
+        );
+        go_to_main_page();
+    } else {
+        add_error(_("Unknown error"));
         go_back_to_previous_page();
     }
+
 
 }
 

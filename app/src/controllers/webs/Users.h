@@ -21,6 +21,13 @@
 //which would have the side effects to require to recompile the
 // controller every time we modify a model. even though it does
 // not affect the controller
+namespace cppcmsskel {
+namespace models {
+    class Users;
+    // %%%NEXT_CLASS_MODEL_CTRL_MARKER%%%
+}
+}
+
 namespace tatosso {
 
 namespace models {
@@ -49,6 +56,9 @@ class Users : public ::controllers::webs::Controller {
         ~Users();
 
     private:
+
+        cppcmsskel::models::Users *usersModel;
+
         /**
          * @since %%MODEL_CTRL_TODAY%%
          */
