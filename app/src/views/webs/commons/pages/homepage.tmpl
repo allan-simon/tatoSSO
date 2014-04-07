@@ -1,0 +1,19 @@
+<% c++ #include "contents/Pages.h" %>
+<% skin %>
+<% view common_homepage uses contents::pages::Homepage extends master %>
+<% template title() %><% gt "New Website"  %><% end template %>
+
+
+<% template main_content() %> 
+    <div class="module">
+        <h1><% gt "Welcome to TatoSSO" %></h1>
+        <p>
+            <% gt "TatoSSO is a project which aims to implements a easy to use, fast, and memory efficient Single Sign On system " %>
+        </p>
+    </div>
+<% end template %>
+
+
+
+<% end view %>
+<% end skin %>

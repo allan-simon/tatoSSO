@@ -43,7 +43,7 @@
         }
 	},
    "views" : {
-        "default_skin" : "default_skin"
+        "default_skin" : "responsive"
     }
 
 

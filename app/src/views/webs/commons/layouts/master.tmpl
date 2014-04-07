@@ -1,0 +1,190 @@
+<% c++ #ifndef COMMONS_SKIN_LAYOUT_MASTER %>
+<% c++ #define COMMONS_SKIN_LAYOUT_MASTER %>
+<% c++ #include <cppcms_skel/generics/Config.h> %>
+<% c++ #include "contents/BaseContent.h" %>
+<% skin %>
+<% view common_master uses tatosso::contents::BaseContent %>
+
+<% template render() %><!DOCTYPE html>
+<html lang="<%= lang %>">
+    <head><%include head() %></head>
+    <body><%include body() %></body>
+</html>
+<% end template %>
+
+
+/**
+ *
+ */
+<% template css() %>
+    <% include global_css() %>
+    <% include group_css() %>
+    <% include local_css() %>
+<% end template %>
+
+/**
+ *
+ */
+<% template head_js() %>
+    <% include head_global_js() %>
+    <% include head_group_js() %>
+    <% include head_local_js() %>
+<% end template %>
+
+/**
+ *
+ */
+<% template body() %><% end template %>
+
+/**
+ *
+ */
+<% template head() %><% end template %>
+
+/**
+ *
+ */
+<% template title() %>TODO: replace this<% end template %>
+
+/**
+ *
+ */
+<% template brand () %>
+<a class="brand" href="/">
+    Test
+</a>
+<% end template %>
+
+
+<% template asset_url(std::string const& type, std::string const& file) %><% c++ out() << Config::get_assets_url(); %><%= type %>/<%= file %><% end template %>
+/**
+ * @brief Used to generate a script tag for a javascript file
+ *
+ * @since 20 March 2013
+ */
+
+<% template js_link(std::string const& jsFile) %><script
+    src="<% include asset_url("js",jsFile) %>"
+    type="text/javascript"
+></script><% end template %>
+
+
+<% template css_link(std::string const& cssFile) %><link
+    href="<% include asset_url("css",cssFile) %>"
+    rel="stylesheet"
+    type="text/css"
+/><% end template %>
+
+<% template img_tag(std::string const& imgFile, unsigned width, unsigned height, std::string const& alt) %><img
+    src="<% include asset_url("img",imgFile) %>"
+    width="<%= width %>"
+    height="<%= height %>"
+    alt="<%= alt %>"
+/><%end template %>
+
+<% template description() %>TODO<%end template%>
+
+<% template author() %>TODO <% end template %>
+
+
+/**
+ *
+ * @brief Display a form's widget as an HTML table's row
+ *
+ * @since 22 April 2013
+ */
+<% template widget_row(cppcms::widgets::base_widget & widget) %>
+<% include widget_row_text(widget,"") %>
+<% end template %>
+
+
+<% template widget_row_text(cppcms::widgets::base_widget & widget, std::string const& preinputText ) %>
+<tr>
+    <td class="labels" >
+        <label for="<%= widget.name() %>">
+            <%= widget.message() %>
+        </label>
+    </td>
+    <td>
+        <%= preinputText | raw %>
+        <% form input widget %>
+    </td>
+</tr>
+<% end template %>
+
+/**
+ *
+ */
+<% template global_css() %><% end template %>
+
+/**
+ *
+ */
+<% template group_css() %><% end template %>
+
+/**
+ *
+ */
+<% template local_css() %><% end template %>
+
+/**
+ *
+ */
+<% template head_local_js() %><% end template %>
+
+/**
+ *
+ */
+<% template head_group_js() %><% end template %>
+
+/**
+ *
+ */
+<% template head_global_js() %><% end template %>
+
+/**
+ * @brief Used to include the javascript that does not need to be loaded
+ *        since the beginning, so that page would render faster
+ *
+ * @since 20 March 2013
+ */
+<% template footer_js() %>
+<% include js_link("commons/js/external/jquery.min.js") %>
+<% include local_footer_js() %>
+<% end template %>
+
+/**
+ *
+ * @since 15 July 2013
+ */
+<% template local_footer_js() %><% end template %>
+
+
+
+/**
+ * @brief used to abstract how modules are organized
+ *
+ * @since 7 April 2013
+ */
+<% template begin_module() %><div><% end template %>
+<% template end_module() %></div><% end template %>
+
+
+
+<% template annexe_content() %>
+    <% include begin_module() %>
+        TODO: replace this by actual content
+    <% include end_module () %>
+<% end template %>
+
+
+<% template main_content() %>
+    <% include begin_module() %>
+        TODO replace this by actual content
+    <% include end_module() %>
+<% end template %>
+
+
+<% end view %>
+<% end skin %>
+<% c++ #endif %>

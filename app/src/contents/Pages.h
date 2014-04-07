@@ -14,6 +14,7 @@
 #define CPPCMS_SKEL_CONTENTS_PAGES_H
 
 #include "cppcms_skel/contents/content.h"
+#include "BaseContent.h"
 
 namespace contents {
 namespace pages {
@@ -22,7 +23,7 @@ namespace pages {
  * Base content for every action of Pages controller
  *
  */
-struct Pages : public BaseContent {
+struct Pages : public tatosso::contents::BaseContent {
 };
 
 /**

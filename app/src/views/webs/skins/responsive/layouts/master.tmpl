@@ -1,0 +1,162 @@
+<% c++ #ifndef RESPONSIVE_SKIN_LAYOUT_MASTER %>
+<% c++ #define RESPONSIVE_SKIN_LAYOUT_MASTER %>
+<% c++ #include <cppcms_skel/generics/Config.h> %>
+<% c++ #include "cppcms_skel/contents/content.h" %>
+<% skin responsive %>
+<% view master uses tatosso::contents::BaseContent extends common_master %>
+
+/**
+ *
+ */
+<% template body() %>
+    <div class="navbar navbar-fixed-top"><%include navigation_bar() %></div>
+    <div class="container">
+        <div class="row-fluid">
+            <div id="main_content" class="span8">
+                <% include messages() %>
+                <% include main_content() %>
+            </div>
+            <div class="span4">
+                <%include annexe_content() %>
+            </div>
+        </div>
+        <hr>
+        <% include footer() %>
+    </div>
+    <% include footer_js() %>
+<% end template %>
+
+
+<% template top_menu() %>
+<div id="top_menu_container">
+    <div id="top_menu">
+        <% include navigation_menu() %>
+        <% include user_menu() %>
+    </div>
+</div>
+<% end template %>
+
+/** 
+ * @brief used to abstract how modules are organized
+ * 
+ * @since 7 April 2013
+ */
+<% template begin_module() %><div class="well"><% end template %>
+<% template end_module() %></div><% end template %>
+
+
+
+
+/**
+ *
+ */
+<% template head() %>
+    <meta charset="utf-8">
+    <title><% include title() %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<% include description() %>">
+    <meta name="author" content="<% include author() %>">
+    <% include css() %>
+    <% include head_js() %>
+
+<% end template %>
+
+/**
+ * @brief Will be used to display a message to the user, to aknowledge
+ *        from the success or failure of an action he just made
+ * 
+ * @since 30 August 2011
+ */
+<% template messages() %>
+    <% if not messages.empty() %>
+        <% foreach message in messages %>
+        <% item %>
+            <div class="well alert alert-block alert-<%= message.type%>" >
+                <%= message.text | raw %>
+            </div>
+        <% end %>
+        <% end foreach %>
+    <% end %>
+<% end template %>
+
+<% template navigation_bar() %>
+<div class="navbar-inner">
+    <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <% include brand() %>
+        <div class="nav-collapse"><% include navigation_menu() %></div>
+        <% include user_menu() %>
+    </div>
+</div>
+<% end template %>
+
+/**
+ *
+ */
+<% template navigation_menu() %>
+<ul class="nav">
+    <li>
+        <a href="#" >
+            <% gt "Nothing" %>
+        </a>
+    </li>
+</ul>
+<% end template %>
+
+
+<% template user_menu() %>
+<div id="user_menu">
+    <!-- TODO put here the user menu -->
+</div>
+<% end template %>
+
+/**
+ *
+ */
+<% template footer() %>
+<footer><div class="container">
+    <p><% gt "&copy; Allan Simon, powered by C++ and cppcmskel" %></p>
+</div></footer>
+<% end template %>
+
+
+
+/**
+ *
+ */
+<% template global_css() %>
+    <!-- Le styles -->
+    <% include css_link("commons/css/external/bootstrap.min.css") %>
+    <% include css_link("commons/css/external/bootstrap-responsive.min.css") %>
+    <% include css_link("skins/responsive/css/layouts/default.css") %>
+<% end template %>
+
+/**
+ *
+ */
+<% template head_global_js() %>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<% end template %>
+
+
+/**
+ * @brief Used to include the javascript that does not need to be loaded
+ *        since the beginning, so that page would render faster
+ * 
+ * @since 20 March 2013
+ */
+<% template footer_js() %>
+<% include js_link("commons/js/external/jquery.min.js") %>
+<% include js_link("commons/js/external/bootstrap.min.js") %>
+<% include local_footer_js() %>
+<% end template %>
+
+<% end view %>
+<% end skin %>
+<% c++ #endif %>

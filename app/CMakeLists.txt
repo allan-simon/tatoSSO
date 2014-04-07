@@ -90,7 +90,7 @@ add_executable(
     ${generics_files}
     ${results_files}
     ${contents_files}
-    view_default_skin_web.cpp
+    view_responsive_skin_web.cpp
 )
 
 set(
@@ -111,26 +111,44 @@ target_link_libraries(
     ${MAIN_PROJECT_LIBS}
 )
 
+###########################
+# Part common to all skins
+###########################
+set(
+    WEB_SKINS_COMMONS_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/views/webs/commons/
+)
+
+set(
+    WEB_SKINS_COMMONS
+    ${WEB_SKINS_COMMONS_DIR}/layouts/master.tmpl
+    ${WEB_SKINS_COMMONS_DIR}/*/*.tmpl
+)
+
+
+
 
 ########################
-#  Default skin
+#  responsive skin
 ########################
 set(
-    DEFAULT_WEB_SKIN_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/views/webs/default_skin
+    RESPONSIVE_WEB_SKIN_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/views/webs/skins/responsive
 )
 
 add_custom_command(
-    OUTPUT view_default_skin_web.cpp
+    OUTPUT view_responsive_skin_web.cpp
     COMMAND cppcms_tmpl_cc 
-        ${DEFAULT_WEB_SKIN_DIR}/layouts/master.tmpl
-        ${DEFAULT_WEB_SKIN_DIR}/*/*.tmpl 
-        -o view_default_skin_web.cpp
-        -s default_skin
+        ${WEB_SKINS_COMMONS_DIR}/layouts/master.tmpl
+        ${RESPONSIVE_WEB_SKIN_DIR}/layouts/master.tmpl
+        ${WEB_SKINS_COMMONS_DIR}/*/*.tmpl
+        ${RESPONSIVE_WEB_SKIN_DIR}/*/*.tmpl 
+        -o view_responsive_skin_web.cpp
+        -s responsive
     DEPENDS
-        ${DEFAULT_WEB_SKIN_DIR}/*/*.tmpl 
+        ${WEB_SKINS_COMMONS}
+        ${RESPONSIVE_WEB_SKIN_DIR}/*/*.tmpl 
 )
-
 
 
 ##################
